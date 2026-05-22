@@ -12,7 +12,10 @@ function TabIcon({ name, focused }: { name: string; focused: boolean }) {
   };
 
   return (
-    <View style={[styles.iconWrapper, focused && styles.iconActive]}>
+    <View
+      pointerEvents="none"
+      style={[styles.iconWrapper, focused && styles.iconActive]}
+    >
       <Text style={styles.iconEmoji}>{icons[name] ?? '●'}</Text>
       <Text style={[styles.iconLabel, focused && styles.iconLabelActive]}>
         {name.charAt(0).toUpperCase() + name.slice(1)}

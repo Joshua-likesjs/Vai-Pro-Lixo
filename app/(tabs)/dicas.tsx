@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'expo-router';
 import {
   View,
   Text,
@@ -15,6 +16,7 @@ const CATEGORIES = ['Todas', 'Reciclagem', 'Segurança', 'Boas práticas'];
 
 export default function DicasScreen() {
   const { user } = useAuth();
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState('Todas');
 
   // ← FILTRO: quando "Todas" está selecionado, mostra tudo; senão filtra por categoria
@@ -27,11 +29,15 @@ export default function DicasScreen() {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Dicas de coleta</Text>
-        <View style={styles.avatar}>
+        <TouchableOpacity
+          style={styles.avatar}
+          onPress={() => router.push('/(tabs)/perfil')}
+          activeOpacity={0.85}
+        >
           <Text style={styles.avatarText}>
             {user?.nome?.charAt(0).toUpperCase() ?? 'U'}
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Category pills */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'expo-router';
 import {
   View,
   Text,
@@ -13,17 +14,22 @@ import { useAuth } from '../../src/context/AuthContext';
 
 export default function LocaisScreen() {
   const { user } = useAuth();
+  const router = useRouter();
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Locais de coleta</Text>
-        <View style={styles.avatar}>
+        <TouchableOpacity
+          style={styles.avatar}
+          onPress={() => router.push('/(tabs)/perfil')}
+          activeOpacity={0.85}
+        >
           <Text style={styles.avatarText}>
             {user?.nome?.charAt(0).toUpperCase() ?? 'U'}
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <ScrollView

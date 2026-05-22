@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useRouter } from 'expo-router';
 import {
   View,
   Text,
@@ -15,6 +16,7 @@ const DAY_NAMES = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 
 
 export default function HomeScreen() {
   const { user } = useAuth();
+  const router = useRouter();
 
   const todayIndex = new Date().getDay();
   const nearest = COLLECTION_POINTS[0];
@@ -42,11 +44,15 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>Olá,</Text>
             <Text style={styles.userName}>{user?.nome?.split(' ')[0] ?? 'Usuário'} 👋</Text>
           </View>
-          <View style={styles.avatar}>
+          <TouchableOpacity
+            style={styles.avatar}
+            onPress={() => router.push('/(tabs)/perfil')}
+            activeOpacity={0.85}
+          >
             <Text style={styles.avatarText}>
               {user?.nome?.charAt(0).toUpperCase() ?? 'U'}
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* Nearest point */}
