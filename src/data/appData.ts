@@ -46,17 +46,18 @@ export interface CollectionDay {
 
 export const COLLECTION_SCHEDULE: CollectionDay[] = [
   { day: 'Segunda-feira', shortDay: 'Segunda', types: ['Plástico', 'Metal'] },
-  { day: 'Terça-feira',  shortDay: 'Terça',   types: ['Papel', 'Papelão'] },
-  { day: 'Quarta-feira', shortDay: 'Quarta',  types: ['Vidro'] },
-  { day: 'Quinta-feira', shortDay: 'Quinta',  types: ['Eletrônicos', 'Pilhas'] },
-  { day: 'Sexta-feira',  shortDay: 'Sexta',   types: ['Orgânico', 'Rejeitos'] },
-  { day: 'Sábado',       shortDay: 'Sábado',  types: ['Plástico', 'Vidro', 'Metal'] },
+  { day: 'Terça-feira', shortDay: 'Terça', types: ['Papel', 'Papelão'] },
+  { day: 'Quarta-feira', shortDay: 'Quarta', types: ['Vidro'] },
+  { day: 'Quinta-feira', shortDay: 'Quinta', types: ['Eletrônicos', 'Pilhas'] },
+  { day: 'Sexta-feira', shortDay: 'Sexta', types: ['Orgânico', 'Rejeitos'] },
+  { day: 'Sábado', shortDay: 'Sábado', types: ['Plástico', 'Vidro', 'Metal'] },
 ];
 
 export interface Tip {
   id: number;
   icon: string;
   text: string;
+  category: string;
 }
 
 export const TIPS: Tip[] = [
@@ -64,30 +65,36 @@ export const TIPS: Tip[] = [
     id: 1,
     icon: '♻️',
     text: 'Recicláveis devem estar limpos e secos para evitar contaminação.',
+    category: 'Reciclagem',
   },
   {
     id: 2,
     icon: '🍶',
     text: 'Vidro quebrado deve ser embrulhado e identificado para proteger os coletores.',
+    category: 'Segurança',
   },
   {
     id: 3,
     icon: '🗂️',
     text: 'Separar o lixo em recicláveis e não recicláveis já ajuda bastante.',
+    category: 'Boas práticas',
   },
   {
     id: 4,
     icon: '🔋',
     text: 'Pilhas e baterias nunca devem ser jogadas no lixo comum — leve a um PEV.',
+    category: 'Segurança',
   },
   {
     id: 5,
     icon: '📦',
     text: 'Amasse caixas de papelão para economizar espaço nos coletores.',
+    category: 'Reciclagem',
   },
   {
     id: 6,
     icon: '🧴',
     text: 'Embalagens de produtos químicos precisam de descarte especial.',
+    category: 'Segurança',
   },
 ];

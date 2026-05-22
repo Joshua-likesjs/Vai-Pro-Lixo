@@ -17,6 +17,11 @@ export default function DicasScreen() {
   const { user } = useAuth();
   const [activeCategory, setActiveCategory] = useState('Todas');
 
+  // ← FILTRO: quando "Todas" está selecionado, mostra tudo; senão filtra por categoria
+  const filteredTips = activeCategory === 'Todas'
+    ? TIPS
+    : TIPS.filter((tip) => tip.category === activeCategory);
+
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
       {/* Header */}
@@ -56,14 +61,26 @@ export default function DicasScreen() {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {TIPS.map((tip, i) => (
-          <View key={tip.id} style={styles.card}>
-            <View style={styles.iconCircle}>
-              <Text style={styles.iconText}>{tip.icon}</Text>
+        {filteredTips.length > 0 ? (
+          filteredTips.map((tip) => (
+            <View key={tip.id} style={styles.card}>
+              <View style={styles.iconCircle}>
+                <Text style={styles.iconText}>{tip.icon}</Text>
+              </View>
+              <View style={styles.tipContent}>
+                <Text style={styles.tipText}>{tip.text}</Text>
+                <Text style={styles.tipCategory}>{tip.category}</Text>
+              </View>
             </View>
-            <Text style={styles.tipText}>{tip.text}</Text>
+          ))
+        ) : (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyIcon}>🔍</Text>
+            <Text style={styles.emptyText}>
+              Nenhuma dica encontrada para "{activeCategory}"
+            </Text>
           </View>
-        ))}
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -157,11 +174,35 @@ const styles = StyleSheet.create({
   iconText: {
     fontSize: 20,
   },
-  tipText: {
+  tipContent: {
     flex: 1,
+    gap: 4,
+  },
+  tipText: {
     fontSize: 14,
     fontWeight: '600',
     color: Colors.dark,
     lineHeight: 21,
+  },
+  tipCategory: {
+    fontSize: 11,
+    fontWeight: '800',
+    color: Colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingTop: 40,
+    gap: 8,
+  },
+  emptyIcon: {
+    fontSize: 40,
+  },
+  emptyText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: Colors.textMuted,
+    textAlign: 'center',
   },
 });
